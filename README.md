@@ -32,32 +32,36 @@ X-Vue-Admin 项目使用最新的前端技术栈，包括 Vue 3、Vite、Pinia �
 要在本地环境中运行该项目，请按照以下步骤操作：
 
 1. 克隆仓库：
-    ```bash
-    git clone https://github.com/xubaoer19940428/vue3-admin-vite-project.git
-    
-    cd admin-project
-    ```
+
+   ```bash
+   git clone https://github.com/xubaoer19940428/vue3-admin-vite-project.git
+
+   cd admin-project
+   ```
 
 2. 安装依赖项：
-    ```bash
-    npm install
-    ```
+
+   ```bash
+   npm install
+   ```
 
 3. 配置环境变量：
-    在项目根目录下创建 `.env` 文件，并添加必要的环境变量，例如 API 的 URL。
-    ```env
-    VITE_API_URL=http://your-api-url.com
-    ```
+   在项目根目录下创建 `.env` 文件，并添加必要的环境变量，例如 API 的 URL。
+
+   ```env
+   VITE_API_URL=http://your-api-url.com
+   ```
 
 4. 启动开发服务器：
-    ```bash
-    npm run dev
-    ```
+
+   ```bash
+   npm run dev
+   ```
 
 5. 构建生产版本：
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
 
 ## 使用
 
@@ -95,25 +99,34 @@ admin-project
 ```
 
 ## 使用技术
+
 - [Vue 3](https://v3.vuejs.org/)
 - [Vite](https://vitejs.dev/)
 - [Pinia](https://pinia.vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [Axios](https://axios-http.com/)
-  
+
 ## 贡献
+
 我们欢迎所有人贡献代码！如果你想为此项目做贡献，请遵循以下步骤：
+
 - Fork 本项目到你的 GitHub。
 - 创建一个新的分支：
+
 ```bash
 git checkout -b my-feature-branch
 ```
+
 - 提交你的更改：
+
 ```bash
 git commit -m "Add new feature"
 ```
+
 - 推送分支到你的仓库：
+
 ```bash
 git push origin my-feature-branch
 ```
+
 - 创建一个 Pull Request。

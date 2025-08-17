@@ -24,6 +24,9 @@ module.exports = {
   },
   // eslint-plugin-vue @typescript-eslint/eslint-plugin eslint-plugin-prettier的缩写
   plugins: ['vue', '@typescript-eslint', 'prettier'],
+  ignorePatterns: [
+    '.prettierrc.js', // 忽略 prettier 配置文件
+  ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
@@ -37,7 +40,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-var': 'error',
-    'prettier/prettier': 'error',
     // 禁止出现console
     'no-console': 'warn',
     // 禁用debugger
@@ -119,7 +121,13 @@ module.exports = {
     // 禁止出现多行空行
     'no-multiple-empty-lines': 'warn',
     // 禁止出现;
-    semi: ['warn', 'never'],
+    semi: 'off', // 关闭 ESLint 对分号的校验
+    'prettier/prettier': [
+      'error',
+      {
+        semi: true, // 统一要求结尾加分号（或 false 表示不要分号）
+      },
+    ],
     // 强制在块之前使用一致的空格
     'space-before-blocks': 'warn',
     // 强制在 function的左括号之前使用一致的空格
@@ -145,6 +153,7 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
+    'vue/multi-word-component-names': 'off',
   },
   globals: {
     defineProps: 'readonly',
@@ -152,4 +161,4 @@ module.exports = {
     defineExpose: 'readonly',
     withDefaults: 'readonly',
   },
-}
+};

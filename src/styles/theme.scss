@@ -2,104 +2,104 @@
 //data-theme为其他值时，就采用组件库的默认样式
 //这里我只定义了两套主题方案，想要再多只需在`$themes`里加就行了
 //注意一点是，每套配色方案里的key可以自定义但必须一致，不然就会混乱
+@use 'sass:map';
 @function elementPlusColor($type-name) {
-    @return var(--el-#{$type-name});
+  @return var(--el-#{$type-name});
 }
 // #adbcd6
 $themes: (
-    light: (
-        bgColor: #fff,
-        textColor: #606266,
-        menuBgColor: #324157,
-        borderColor: elementPlusColor("border-color-light"),
-        headerColor: #fff,
-        loginPageBgColor:#ddd,
-        loginFormBgColor: rgba(255, 255, 255, 0.8),
-        boxShadow: 0px 1px 4px rgba(0, 0, 0, 0.5),
-    ),
-    dark: (
-        bgColor: #111,
-        textColor: #fff,
-        menuBgColor: #111,
-        borderColor: elementPlusColor("border-color-dark"),
-        headerColor: #111,
-        loginPageBgColor:#111,
-        loginFormBgColor: rgba(0, 0, 0, 0.5),
-        boxShadow: 0px 1px 4px rgba(255, 255, 255, 0.8)
-    )
+  light: (
+    bgColor: #fff,
+    textColor: #606266,
+    menuBgColor: #324157,
+    borderColor: elementPlusColor('border-color-light'),
+    headerColor: #fff,
+    loginPageBgColor: #ddd,
+    loginFormBgColor: rgba(255, 255, 255, 0.8),
+    boxShadow: 0px 1px 4px rgba(0, 0, 0, 0.5),
+  ),
+  dark: (
+    bgColor: #111,
+    textColor: #fff,
+    menuBgColor: #111,
+    borderColor: elementPlusColor('border-color-dark'),
+    headerColor: #111,
+    loginPageBgColor: #111,
+    loginFormBgColor: rgba(0, 0, 0, 0.5),
+    boxShadow: 0px 1px 4px rgba(255, 255, 255, 0.8),
+  ),
 );
 $curTheme: light;
 
 @mixin useTheme() {
-    @each $key, $value in $themes {
-        $curTheme: $key !global;
-        html[data-theme="#{$key}"] & {
-            @content;
-        }
+  @each $key, $value in $themes {
+    $curTheme: $key !global;
+    html[data-theme='#{$key}'] & {
+      @content;
     }
+  }
 }
 @function getVal($key) {
-    $themeMap: map-get($themes, $curTheme);
-    @return map-get($themeMap, $key);
+  $themeMap: map.get($themes, $curTheme);
+  @return map.get($themeMap, $key);
 }
-.el-icon{
-    @include useTheme {
-        color:getVal('textColor')
-    }
+.el-icon {
+  @include useTheme {
+    color: getVal('textColor');
+  }
 }
 .x_admin_header,
 .layout_view,
 .x_right {
+  @include useTheme {
+    background-color: getVal('bgColor');
+    color: getVal('textColor');
+  }
+  .el-form-item__label {
     @include useTheme {
-        background-color: getVal("bgColor");
-        color: getVal("textColor");
+      color: getVal('textColor');
     }
-    .el-form-item__label {
-        @include useTheme {
-            color: getVal("textColor");
-        }
+  }
+  .el-input {
+    @include useTheme {
+      border-color: getVal('borderColor');
     }
-    .el-input {
-        @include useTheme {
-            border-color: getVal("borderColor");
-        }
+  }
+  .el-sub-menu__title {
+    @include useTheme {
+      background-color: getVal('menuBgColor') !important;
     }
-    .el-sub-menu__title {
-        @include useTheme {
-            background-color: getVal("menuBgColor") !important;
-        }
-    }
+  }
 }
 .el-aside,
 .el-menu {
-    @include useTheme {
-        background-color: getVal("menuBgColor");
-    }
+  @include useTheme {
+    background-color: getVal('menuBgColor');
+  }
 }
 .x-admin-header {
-    @include useTheme {
-        background-color: getVal("headerColor");
-    }
+  @include useTheme {
+    background-color: getVal('headerColor');
+  }
 }
 //登录页
 .login-container {
-    @include useTheme {
-        background-color: getVal("loginPageBgColor");
-    }
+  @include useTheme {
+    background-color: getVal('loginPageBgColor');
+  }
 }
 .login-box {
+  @include useTheme {
+    background-color: getVal('loginFormBgColor');
+  }
+  .login-form {
     @include useTheme {
-        background-color: getVal("loginFormBgColor");
+      box-shadow: getVal('boxShadow');
     }
-    .login-form{
-        @include useTheme {
-            box-shadow: getVal("boxShadow");
-            
-        }
+  }
+  .iconfont {
+    @include useTheme {
+      color: getVal('textColor');
     }
-    .iconfont{
-        @include useTheme {
-            color:getVal('textColor')
-        }
-    }
+  }
 }
