@@ -1,9 +1,3 @@
-<!--
- * 404.vue
- * @author: AUTHOR
- * @description: DESCRIPTION
- * @since: 2024-07-26
--->
 <template>
   <div class="container">
     <svg style="width: 900px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
@@ -758,11 +752,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const goHome = () => {
-  router.push('/');
+<script>
+export default {
+  methods: {
+    goHome() {
+      this.$router.push('/');
+    },
+  },
 };
 </script>
 

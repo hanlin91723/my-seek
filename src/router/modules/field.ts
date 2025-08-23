@@ -1,5 +1,5 @@
 import layOut from '@/layout/index.vue';
-const Dashboard = [
+const Field = [
   {
     path: '/field',
     redirect: '/field/list',
@@ -18,7 +18,8 @@ const Dashboard = [
         },
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
+
         name: 'FieldDetail',
         component: () => import('@/pages/field/detail.vue'),
         meta: {
@@ -31,4 +32,4 @@ const Dashboard = [
     ],
   },
 ];
-export default Dashboard;
+export default Field;

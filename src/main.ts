@@ -7,7 +7,8 @@ import 'element-plus/dist/index.css';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 //引用echarts
-// import * as echarts from 'echarts'
+import ECharts from 'vue-echarts';
+import 'echarts';
 
 //引用vueRouter
 import router from './router/index';
@@ -21,7 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 app.use(router);
-
+app.component('VChart', ECharts);
 app.use(createPinia());
 app.mount('#app');
 app.use(ElementPlus, { locale: zhCn });

@@ -1,8 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { RouterObject } from './interface/index';
-
 import NProgress from '@/utils/nprogress';
+import layOut from '@/layout/index.vue';
 // * 导入所有router
 const metaRouters = import.meta.globEager('./modules/*.ts');
 // * 处理路由
@@ -22,6 +21,161 @@ const routes: RouterObject[] = [
   },
   ...Field,
   ...Professional,
+  // {
+  //   path: '/field1',
+  //   redirect: '/field/list',
+  //   component: layOut,
+  //   meta: { title: '领域库1', key: 'field' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'FieldList',
+  //       component: () => import('@/pages/field/list.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldList',
+  //         title: '领域列表',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //     {
+  //       path: 'detail/:id',
+
+  //       name: 'FieldDetail',
+  //       component: () => import('@/pages/field/detail.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldDetail',
+  //         title: '领域详情',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/field2',
+  //   redirect: '/field/list',
+  //   component: layOut,
+  //   meta: { title: '领域库2', key: 'field' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'FieldList',
+  //       component: () => import('@/pages/field/list.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldList',
+  //         title: '领域列表',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //     {
+  //       path: 'detail/:id',
+
+  //       name: 'FieldDetail',
+  //       component: () => import('@/pages/field/detail.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldDetail',
+  //         title: '领域详情',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/field3',
+  //   redirect: '/field/list',
+  //   component: layOut,
+  //   meta: { title: '领域库3', key: 'field' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'FieldList',
+  //       component: () => import('@/pages/field/list.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldList',
+  //         title: '领域列表',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //     {
+  //       path: 'detail/:id',
+
+  //       name: 'FieldDetail',
+  //       component: () => import('@/pages/field/detail.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldDetail',
+  //         title: '领域详情',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/field4',
+  //   redirect: '/field/list',
+  //   component: layOut,
+  //   meta: { title: '领域库4', key: 'field' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'FieldList',
+  //       component: () => import('@/pages/field/list.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldList',
+  //         title: '领域列表',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //     {
+  //       path: 'detail/:id',
+
+  //       name: 'FieldDetail',
+  //       component: () => import('@/pages/field/detail.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldDetail',
+  //         title: '领域详情',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/field5',
+  //   redirect: '/field/list',
+  //   component: layOut,
+  //   meta: { title: '领域库5', key: 'field' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'FieldList',
+  //       component: () => import('@/pages/field/list.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldList',
+  //         title: '领域列表',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //     {
+  //       path: 'detail/:id',
+
+  //       name: 'FieldDetail',
+  //       component: () => import('@/pages/field/detail.vue'),
+  //       meta: {
+  //         keepAlive: false,
+  //         key: 'fieldDetail',
+  //         title: '领域详情',
+  //         parentPath: '/field',
+  //       },
+  //     },
+  //   ],
+  // },
   // ...routerArray,
   {
     path: '/404',
@@ -39,7 +193,7 @@ const routes: RouterObject[] = [
 ];
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: routes as RouteRecordRaw[],
 });
 router.beforeEach((to, _from, next) => {
   NProgress.start();

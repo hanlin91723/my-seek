@@ -40,6 +40,8 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-var': 'error',
+    'vue/no-undef': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
     // 禁止出现console
     'no-console': 'warn',
     // 禁用debugger

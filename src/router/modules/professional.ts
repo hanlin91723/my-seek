@@ -1,5 +1,5 @@
 import layOut from '@/layout/index.vue';
-const Home = [
+const Professional = [
   {
     path: '/professional',
     redirect: '/professional/list',
@@ -18,7 +18,7 @@ const Home = [
         },
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         name: 'ProfessionalDetail',
         component: () => import('@/pages/professional/detail.vue'),
         meta: {
@@ -31,4 +31,4 @@ const Home = [
     ],
   },
 ];
-export default Home;
+export default Professional;

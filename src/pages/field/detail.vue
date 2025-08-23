@@ -1,9 +1,3 @@
-<!--
- * home.vue
- * @author: AUTHOR
- * @description: DESCRIPTION
- * @since: 2024-07-29
--->
 <template>
   <div class="detail">领域详情</div>
 </template>
