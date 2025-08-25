@@ -2,7 +2,11 @@
 <template>
   <div class="x-admin-header">
     <el-breadcrumb>
-      <el-breadcrumb-item v-for="item in levelList" :key="item.path" :to="{ path: item.path }">
+      <el-breadcrumb-item
+        v-for="(item, index) in levelList"
+        :key="item.path"
+        :to="index === levelList.length - 1 ? '' : item.path"
+      >
         {{ item.meta.title }}
       </el-breadcrumb-item>
     </el-breadcrumb>

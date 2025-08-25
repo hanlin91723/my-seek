@@ -36,14 +36,6 @@ export default {
       return this.$route.meta.parentPath;
     },
   },
-
-  methods: {
-    gotoDashboard() {
-      this.$router.push({
-        name: 'dashboard',
-      });
-    },
-  },
 };
 </script>
 <style lang="scss" scoped>

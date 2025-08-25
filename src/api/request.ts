@@ -1,64 +1,79 @@
-import router from '@/router';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
-
-const BASE = import.meta.env.VITE_APP_API + 'api';
-const httpService = axios.create({
-  timeout: 1000,
+const service = axios.create({
+  timeout: 30000,
+  baseURL: import.meta.env.VITE_APP_API,
+  responseType: 'json',
+  headers: {
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
 });
+//请求拦截
+service.interceptors.request.use(
+  config => {
+    const extra = {
+      key: 'f21fe646ac4cfc4f8eafbbbd91bd5f70',
+      key_words: config.data,
+    };
+    config.data = {
+      ...extra,
+    };
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+//响应拦截
+service.interceptors.response.use(
+  result => {
+    if (result.data.code === 200) {
+      return result.data;
+    }
+    ElMessage.error(result.data.message);
+    return Promise.reject(result);
+  },
+  error => {
+    if (error.response) {
+      ElMessage.error(error.response.data.message);
+    } else {
+      //请求超时状态
+      if (error.message.includes('timeout')) {
+        ElMessage.error('网络请求超时，请稍后再试');
+      } else if (error.message.includes('canceled')) {
+        // 取消请求
+      } else {
+        //可以展示断网组件
+        ElMessage.error('网络请求异常，请稍后再试');
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 /**
- * @param {*} method get post
- * @param {*} url 服务名称
- * @param {*} interfaceName 接口名称
- * @param {*} data 入参
- * @param {*} $header 额外请求头
- * @param {*} baseUrl 请求地址
- * @param {*} versionCode api版本
- * @param {*} group 用户群组
+ * 封装 请求
  */
-interface requestParams {
-  method?: any;
-  url: string;
-  data?: Object;
-  params?: Object;
-  $header?: any;
-  baseUrl?: string;
-  group?: string;
-}
-interface responseParams {
-  code: number;
-  message: string;
-  data: any;
-}
-function request(config: requestParams) {
-  const headersConfig = {};
+function request(
+  method: 'get' | 'post' | 'put' | 'patch' | 'delete',
+  url: string,
+  params = {},
+  options = {}
+) {
   return new Promise((resolve, reject) => {
-    httpService({
-      baseURL: config.baseUrl ? config.baseUrl : `${BASE}${config.url}`,
-      method: config.method || 'post',
-      data: config.data,
-      params: config.params,
-      headers: Object.assign(headersConfig, config.$header),
-    })
+    const config = Object.assign(
+      {
+        url,
+        method,
+        [method === 'get' || method === 'delete' ? 'params' : 'data']: params,
+      },
+      options
+    );
+    service
+      .request(config)
       .then(res => {
-        console.log(res.data);
-        if (res.status !== 200) {
-          const err = new Error('服务器异常');
-          throw err;
-        }
-        // 响应数据
-        const result: responseParams = res.data;
-        if (result.code === 200 || result.code === 201) {
-          resolve(result);
-        } else if (result.code === 401) {
-          localStorage.clear();
-          router.push({
-            name: 'login',
-          });
-        } else {
-          ElMessage.error(`ErrorMsg: ${result.message}, ErrorCode: ${result.code}`);
-          reject(result);
-        }
+        resolve(res);
       })
       .catch(err => {
         reject(err);
@@ -66,4 +81,12 @@ function request(config: requestParams) {
   });
 }
 
-export default request;
+const http = {
+  get: request.bind(null, 'get'),
+  post: request.bind(null, 'post'),
+  put: request.bind(null, 'put'),
+  patch: request.bind(null, 'patch'),
+  delete: request.bind(null, 'delete'),
+};
+
+export default http;

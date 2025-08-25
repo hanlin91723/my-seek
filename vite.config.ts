@@ -12,15 +12,9 @@ export default ({ mode }) => {
       proxy: {
         // 选项写法
         '/api/': {
-          target: 'http://localhost:3000/',
+          target: 'http://1.14.74.208:7701',
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, 'api'),
-        },
-        // 正则表达式写法
-        '^/fallback/.*': {
-          target: 'http://jsonplaceholder.typicode.com',
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/fallback/, ''),
+          rewrite: path => path.replace(/^\/api/, ''),
         },
       },
       port: 8081,
