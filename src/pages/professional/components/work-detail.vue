@@ -120,24 +120,7 @@ export default {
         children: 'children',
         emitPath: true, // 返回由该节点所在的各级菜单的值所组成的数组
       },
-      fieldOptions: [
-        {
-          value: 'web',
-          label: 'Web',
-          children: [
-            { value: 'frontend', label: '前端' },
-            { value: 'backend', label: '后端' },
-          ],
-        },
-        {
-          value: 'mobile',
-          label: '移动',
-          children: [
-            { value: 'ios', label: 'iOS' },
-            { value: 'android', label: 'Android' },
-          ],
-        },
-      ],
+      fieldOptions: [],
       workTypeOptions: [{ label: '全部', value: '0' }],
       list: [],
       width: 150,
